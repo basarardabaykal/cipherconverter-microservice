@@ -23,6 +23,8 @@ const (
 	CipherService_DecryptCaesar_FullMethodName   = "/cipher.CipherService/DecryptCaesar"
 	CipherService_EncryptColumnar_FullMethodName = "/cipher.CipherService/EncryptColumnar"
 	CipherService_DecryptColumnar_FullMethodName = "/cipher.CipherService/DecryptColumnar"
+	CipherService_EncryptOTP_FullMethodName      = "/cipher.CipherService/EncryptOTP"
+	CipherService_DecryptOTP_FullMethodName      = "/cipher.CipherService/DecryptOTP"
 )
 
 // CipherServiceClient is the client API for CipherService service.
@@ -33,6 +35,8 @@ type CipherServiceClient interface {
 	DecryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
 	EncryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
 	DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
+	EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error)
+	DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error)
 }
 
 type cipherServiceClient struct {
@@ -83,6 +87,26 @@ func (c *cipherServiceClient) DecryptColumnar(ctx context.Context, in *ColumnarR
 	return out, nil
 }
 
+func (c *cipherServiceClient) EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CipherResponse)
+	err := c.cc.Invoke(ctx, CipherService_EncryptOTP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cipherServiceClient) DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(CipherResponse)
+	err := c.cc.Invoke(ctx, CipherService_DecryptOTP_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CipherServiceServer is the server API for CipherService service.
 // All implementations must embed UnimplementedCipherServiceServer
 // for forward compatibility.
@@ -91,6 +115,8 @@ type CipherServiceServer interface {
 	DecryptCaesar(context.Context, *CaesarRequest) (*CipherResponse, error)
 	EncryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error)
 	DecryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error)
+	EncryptOTP(context.Context, *OTPRequest) (*CipherResponse, error)
+	DecryptOTP(context.Context, *OTPRequest) (*CipherResponse, error)
 	mustEmbedUnimplementedCipherServiceServer()
 }
 
@@ -112,6 +138,12 @@ func (UnimplementedCipherServiceServer) EncryptColumnar(context.Context, *Column
 }
 func (UnimplementedCipherServiceServer) DecryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DecryptColumnar not implemented")
+}
+func (UnimplementedCipherServiceServer) EncryptOTP(context.Context, *OTPRequest) (*CipherResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EncryptOTP not implemented")
+}
+func (UnimplementedCipherServiceServer) DecryptOTP(context.Context, *OTPRequest) (*CipherResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DecryptOTP not implemented")
 }
 func (UnimplementedCipherServiceServer) mustEmbedUnimplementedCipherServiceServer() {}
 func (UnimplementedCipherServiceServer) testEmbeddedByValue()                       {}
@@ -206,6 +238,42 @@ func _CipherService_DecryptColumnar_Handler(srv interface{}, ctx context.Context
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CipherService_EncryptOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CipherServiceServer).EncryptOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CipherService_EncryptOTP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CipherServiceServer).EncryptOTP(ctx, req.(*OTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CipherService_DecryptOTP_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(OTPRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CipherServiceServer).DecryptOTP(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CipherService_DecryptOTP_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CipherServiceServer).DecryptOTP(ctx, req.(*OTPRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CipherService_ServiceDesc is the grpc.ServiceDesc for CipherService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +296,14 @@ var CipherService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DecryptColumnar",
 			Handler:    _CipherService_DecryptColumnar_Handler,
+		},
+		{
+			MethodName: "EncryptOTP",
+			Handler:    _CipherService_EncryptOTP_Handler,
+		},
+		{
+			MethodName: "DecryptOTP",
+			Handler:    _CipherService_DecryptOTP_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

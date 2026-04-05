@@ -125,6 +125,58 @@ func (x *ColumnarRequest) GetColumns() int32 {
 	return 0
 }
 
+type OTPRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Text          []byte                 `protobuf:"bytes,1,opt,name=text,proto3" json:"text,omitempty"`
+	Key           []byte                 `protobuf:"bytes,2,opt,name=key,proto3" json:"key,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *OTPRequest) Reset() {
+	*x = OTPRequest{}
+	mi := &file_cipher_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *OTPRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*OTPRequest) ProtoMessage() {}
+
+func (x *OTPRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_cipher_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use OTPRequest.ProtoReflect.Descriptor instead.
+func (*OTPRequest) Descriptor() ([]byte, []int) {
+	return file_cipher_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *OTPRequest) GetText() []byte {
+	if x != nil {
+		return x.Text
+	}
+	return nil
+}
+
+func (x *OTPRequest) GetKey() []byte {
+	if x != nil {
+		return x.Key
+	}
+	return nil
+}
+
 type CipherResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Result        []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
@@ -134,7 +186,7 @@ type CipherResponse struct {
 
 func (x *CipherResponse) Reset() {
 	*x = CipherResponse{}
-	mi := &file_cipher_proto_msgTypes[2]
+	mi := &file_cipher_proto_msgTypes[3]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -146,7 +198,7 @@ func (x *CipherResponse) String() string {
 func (*CipherResponse) ProtoMessage() {}
 
 func (x *CipherResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cipher_proto_msgTypes[2]
+	mi := &file_cipher_proto_msgTypes[3]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +211,7 @@ func (x *CipherResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CipherResponse.ProtoReflect.Descriptor instead.
 func (*CipherResponse) Descriptor() ([]byte, []int) {
-	return file_cipher_proto_rawDescGZIP(), []int{2}
+	return file_cipher_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CipherResponse) GetResult() []byte {
@@ -179,14 +231,22 @@ const file_cipher_proto_rawDesc = "" +
 	"\x05shift\x18\x02 \x01(\x05R\x05shift\"?\n" +
 	"\x0fColumnarRequest\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\fR\x04text\x12\x18\n" +
-	"\acolumns\x18\x02 \x01(\x05R\acolumns\"(\n" +
+	"\acolumns\x18\x02 \x01(\x05R\acolumns\"2\n" +
+	"\n" +
+	"OTPRequest\x12\x12\n" +
+	"\x04text\x18\x01 \x01(\fR\x04text\x12\x10\n" +
+	"\x03key\x18\x02 \x01(\fR\x03key\"(\n" +
 	"\x0eCipherResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\fR\x06result2\x97\x02\n" +
+	"\x06result\x18\x01 \x01(\fR\x06result2\x8b\x03\n" +
 	"\rCipherService\x12>\n" +
 	"\rEncryptCaesar\x12\x15.cipher.CaesarRequest\x1a\x16.cipher.CipherResponse\x12>\n" +
 	"\rDecryptCaesar\x12\x15.cipher.CaesarRequest\x1a\x16.cipher.CipherResponse\x12B\n" +
 	"\x0fEncryptColumnar\x12\x17.cipher.ColumnarRequest\x1a\x16.cipher.CipherResponse\x12B\n" +
-	"\x0fDecryptColumnar\x12\x17.cipher.ColumnarRequest\x1a\x16.cipher.CipherResponseBEZCgithub.com/basarardabaykal/cipherconverter-microservice/internal/pbb\x06proto3"
+	"\x0fDecryptColumnar\x12\x17.cipher.ColumnarRequest\x1a\x16.cipher.CipherResponse\x128\n" +
+	"\n" +
+	"EncryptOTP\x12\x12.cipher.OTPRequest\x1a\x16.cipher.CipherResponse\x128\n" +
+	"\n" +
+	"DecryptOTP\x12\x12.cipher.OTPRequest\x1a\x16.cipher.CipherResponseBEZCgithub.com/basarardabaykal/cipherconverter-microservice/internal/pbb\x06proto3"
 
 var (
 	file_cipher_proto_rawDescOnce sync.Once
@@ -200,23 +260,28 @@ func file_cipher_proto_rawDescGZIP() []byte {
 	return file_cipher_proto_rawDescData
 }
 
-var file_cipher_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_cipher_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_cipher_proto_goTypes = []any{
 	(*CaesarRequest)(nil),   // 0: cipher.CaesarRequest
 	(*ColumnarRequest)(nil), // 1: cipher.ColumnarRequest
-	(*CipherResponse)(nil),  // 2: cipher.CipherResponse
+	(*OTPRequest)(nil),      // 2: cipher.OTPRequest
+	(*CipherResponse)(nil),  // 3: cipher.CipherResponse
 }
 var file_cipher_proto_depIdxs = []int32{
 	0, // 0: cipher.CipherService.EncryptCaesar:input_type -> cipher.CaesarRequest
 	0, // 1: cipher.CipherService.DecryptCaesar:input_type -> cipher.CaesarRequest
 	1, // 2: cipher.CipherService.EncryptColumnar:input_type -> cipher.ColumnarRequest
 	1, // 3: cipher.CipherService.DecryptColumnar:input_type -> cipher.ColumnarRequest
-	2, // 4: cipher.CipherService.EncryptCaesar:output_type -> cipher.CipherResponse
-	2, // 5: cipher.CipherService.DecryptCaesar:output_type -> cipher.CipherResponse
-	2, // 6: cipher.CipherService.EncryptColumnar:output_type -> cipher.CipherResponse
-	2, // 7: cipher.CipherService.DecryptColumnar:output_type -> cipher.CipherResponse
-	4, // [4:8] is the sub-list for method output_type
-	0, // [0:4] is the sub-list for method input_type
+	2, // 4: cipher.CipherService.EncryptOTP:input_type -> cipher.OTPRequest
+	2, // 5: cipher.CipherService.DecryptOTP:input_type -> cipher.OTPRequest
+	3, // 6: cipher.CipherService.EncryptCaesar:output_type -> cipher.CipherResponse
+	3, // 7: cipher.CipherService.DecryptCaesar:output_type -> cipher.CipherResponse
+	3, // 8: cipher.CipherService.EncryptColumnar:output_type -> cipher.CipherResponse
+	3, // 9: cipher.CipherService.DecryptColumnar:output_type -> cipher.CipherResponse
+	3, // 10: cipher.CipherService.EncryptOTP:output_type -> cipher.CipherResponse
+	3, // 11: cipher.CipherService.DecryptOTP:output_type -> cipher.CipherResponse
+	6, // [6:12] is the sub-list for method output_type
+	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -233,7 +298,7 @@ func file_cipher_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cipher_proto_rawDesc), len(file_cipher_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
