@@ -2,11 +2,12 @@
 // versions:
 // 	protoc-gen-go v1.36.11
 // 	protoc        v7.34.0
-// source: cipher.proto
+// source: symmetric.proto
 
-package pb
+package symmetric
 
 import (
+	common "github.com/basarardabaykal/cipherconverter-microservice/internal/pb/common"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -31,7 +32,7 @@ type CaesarRequest struct {
 
 func (x *CaesarRequest) Reset() {
 	*x = CaesarRequest{}
-	mi := &file_cipher_proto_msgTypes[0]
+	mi := &file_symmetric_proto_msgTypes[0]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -43,7 +44,7 @@ func (x *CaesarRequest) String() string {
 func (*CaesarRequest) ProtoMessage() {}
 
 func (x *CaesarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cipher_proto_msgTypes[0]
+	mi := &file_symmetric_proto_msgTypes[0]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -56,7 +57,7 @@ func (x *CaesarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CaesarRequest.ProtoReflect.Descriptor instead.
 func (*CaesarRequest) Descriptor() ([]byte, []int) {
-	return file_cipher_proto_rawDescGZIP(), []int{0}
+	return file_symmetric_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CaesarRequest) GetText() []byte {
@@ -83,7 +84,7 @@ type ColumnarRequest struct {
 
 func (x *ColumnarRequest) Reset() {
 	*x = ColumnarRequest{}
-	mi := &file_cipher_proto_msgTypes[1]
+	mi := &file_symmetric_proto_msgTypes[1]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -95,7 +96,7 @@ func (x *ColumnarRequest) String() string {
 func (*ColumnarRequest) ProtoMessage() {}
 
 func (x *ColumnarRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cipher_proto_msgTypes[1]
+	mi := &file_symmetric_proto_msgTypes[1]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -108,7 +109,7 @@ func (x *ColumnarRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ColumnarRequest.ProtoReflect.Descriptor instead.
 func (*ColumnarRequest) Descriptor() ([]byte, []int) {
-	return file_cipher_proto_rawDescGZIP(), []int{1}
+	return file_symmetric_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ColumnarRequest) GetText() []byte {
@@ -135,7 +136,7 @@ type OTPRequest struct {
 
 func (x *OTPRequest) Reset() {
 	*x = OTPRequest{}
-	mi := &file_cipher_proto_msgTypes[2]
+	mi := &file_symmetric_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -147,7 +148,7 @@ func (x *OTPRequest) String() string {
 func (*OTPRequest) ProtoMessage() {}
 
 func (x *OTPRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_cipher_proto_msgTypes[2]
+	mi := &file_symmetric_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -160,7 +161,7 @@ func (x *OTPRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use OTPRequest.ProtoReflect.Descriptor instead.
 func (*OTPRequest) Descriptor() ([]byte, []int) {
-	return file_cipher_proto_rawDescGZIP(), []int{2}
+	return file_symmetric_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *OTPRequest) GetText() []byte {
@@ -177,55 +178,11 @@ func (x *OTPRequest) GetKey() []byte {
 	return nil
 }
 
-type CipherResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Result        []byte                 `protobuf:"bytes,1,opt,name=result,proto3" json:"result,omitempty"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
-}
+var File_symmetric_proto protoreflect.FileDescriptor
 
-func (x *CipherResponse) Reset() {
-	*x = CipherResponse{}
-	mi := &file_cipher_proto_msgTypes[3]
-	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-	ms.StoreMessageInfo(mi)
-}
-
-func (x *CipherResponse) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*CipherResponse) ProtoMessage() {}
-
-func (x *CipherResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_cipher_proto_msgTypes[3]
-	if x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use CipherResponse.ProtoReflect.Descriptor instead.
-func (*CipherResponse) Descriptor() ([]byte, []int) {
-	return file_cipher_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *CipherResponse) GetResult() []byte {
-	if x != nil {
-		return x.Result
-	}
-	return nil
-}
-
-var File_cipher_proto protoreflect.FileDescriptor
-
-const file_cipher_proto_rawDesc = "" +
+const file_symmetric_proto_rawDesc = "" +
 	"\n" +
-	"\fcipher.proto\x12\x06cipher\"9\n" +
+	"\x0fsymmetric.proto\x12\tsymmetric\x1a\fcommon.proto\"9\n" +
 	"\rCaesarRequest\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\fR\x04text\x12\x14\n" +
 	"\x05shift\x18\x02 \x01(\x05R\x05shift\"?\n" +
@@ -235,51 +192,49 @@ const file_cipher_proto_rawDesc = "" +
 	"\n" +
 	"OTPRequest\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\fR\x04text\x12\x10\n" +
-	"\x03key\x18\x02 \x01(\fR\x03key\"(\n" +
-	"\x0eCipherResponse\x12\x16\n" +
-	"\x06result\x18\x01 \x01(\fR\x06result2\x8b\x03\n" +
-	"\rCipherService\x12>\n" +
-	"\rEncryptCaesar\x12\x15.cipher.CaesarRequest\x1a\x16.cipher.CipherResponse\x12>\n" +
-	"\rDecryptCaesar\x12\x15.cipher.CaesarRequest\x1a\x16.cipher.CipherResponse\x12B\n" +
-	"\x0fEncryptColumnar\x12\x17.cipher.ColumnarRequest\x1a\x16.cipher.CipherResponse\x12B\n" +
-	"\x0fDecryptColumnar\x12\x17.cipher.ColumnarRequest\x1a\x16.cipher.CipherResponse\x128\n" +
+	"\x03key\x18\x02 \x01(\fR\x03key2\x9d\x03\n" +
+	"\rCipherService\x12A\n" +
+	"\rEncryptCaesar\x12\x18.symmetric.CaesarRequest\x1a\x16.common.CipherResponse\x12A\n" +
+	"\rDecryptCaesar\x12\x18.symmetric.CaesarRequest\x1a\x16.common.CipherResponse\x12E\n" +
+	"\x0fEncryptColumnar\x12\x1a.symmetric.ColumnarRequest\x1a\x16.common.CipherResponse\x12E\n" +
+	"\x0fDecryptColumnar\x12\x1a.symmetric.ColumnarRequest\x1a\x16.common.CipherResponse\x12;\n" +
 	"\n" +
-	"EncryptOTP\x12\x12.cipher.OTPRequest\x1a\x16.cipher.CipherResponse\x128\n" +
+	"EncryptOTP\x12\x15.symmetric.OTPRequest\x1a\x16.common.CipherResponse\x12;\n" +
 	"\n" +
-	"DecryptOTP\x12\x12.cipher.OTPRequest\x1a\x16.cipher.CipherResponseBEZCgithub.com/basarardabaykal/cipherconverter-microservice/internal/pbb\x06proto3"
+	"DecryptOTP\x12\x15.symmetric.OTPRequest\x1a\x16.common.CipherResponseBOZMgithub.com/basarardabaykal/cipherconverter-microservice/internal/pb/symmetricb\x06proto3"
 
 var (
-	file_cipher_proto_rawDescOnce sync.Once
-	file_cipher_proto_rawDescData []byte
+	file_symmetric_proto_rawDescOnce sync.Once
+	file_symmetric_proto_rawDescData []byte
 )
 
-func file_cipher_proto_rawDescGZIP() []byte {
-	file_cipher_proto_rawDescOnce.Do(func() {
-		file_cipher_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_cipher_proto_rawDesc), len(file_cipher_proto_rawDesc)))
+func file_symmetric_proto_rawDescGZIP() []byte {
+	file_symmetric_proto_rawDescOnce.Do(func() {
+		file_symmetric_proto_rawDescData = protoimpl.X.CompressGZIP(unsafe.Slice(unsafe.StringData(file_symmetric_proto_rawDesc), len(file_symmetric_proto_rawDesc)))
 	})
-	return file_cipher_proto_rawDescData
+	return file_symmetric_proto_rawDescData
 }
 
-var file_cipher_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_cipher_proto_goTypes = []any{
-	(*CaesarRequest)(nil),   // 0: cipher.CaesarRequest
-	(*ColumnarRequest)(nil), // 1: cipher.ColumnarRequest
-	(*OTPRequest)(nil),      // 2: cipher.OTPRequest
-	(*CipherResponse)(nil),  // 3: cipher.CipherResponse
+var file_symmetric_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_symmetric_proto_goTypes = []any{
+	(*CaesarRequest)(nil),         // 0: symmetric.CaesarRequest
+	(*ColumnarRequest)(nil),       // 1: symmetric.ColumnarRequest
+	(*OTPRequest)(nil),            // 2: symmetric.OTPRequest
+	(*common.CipherResponse)(nil), // 3: common.CipherResponse
 }
-var file_cipher_proto_depIdxs = []int32{
-	0, // 0: cipher.CipherService.EncryptCaesar:input_type -> cipher.CaesarRequest
-	0, // 1: cipher.CipherService.DecryptCaesar:input_type -> cipher.CaesarRequest
-	1, // 2: cipher.CipherService.EncryptColumnar:input_type -> cipher.ColumnarRequest
-	1, // 3: cipher.CipherService.DecryptColumnar:input_type -> cipher.ColumnarRequest
-	2, // 4: cipher.CipherService.EncryptOTP:input_type -> cipher.OTPRequest
-	2, // 5: cipher.CipherService.DecryptOTP:input_type -> cipher.OTPRequest
-	3, // 6: cipher.CipherService.EncryptCaesar:output_type -> cipher.CipherResponse
-	3, // 7: cipher.CipherService.DecryptCaesar:output_type -> cipher.CipherResponse
-	3, // 8: cipher.CipherService.EncryptColumnar:output_type -> cipher.CipherResponse
-	3, // 9: cipher.CipherService.DecryptColumnar:output_type -> cipher.CipherResponse
-	3, // 10: cipher.CipherService.EncryptOTP:output_type -> cipher.CipherResponse
-	3, // 11: cipher.CipherService.DecryptOTP:output_type -> cipher.CipherResponse
+var file_symmetric_proto_depIdxs = []int32{
+	0, // 0: symmetric.CipherService.EncryptCaesar:input_type -> symmetric.CaesarRequest
+	0, // 1: symmetric.CipherService.DecryptCaesar:input_type -> symmetric.CaesarRequest
+	1, // 2: symmetric.CipherService.EncryptColumnar:input_type -> symmetric.ColumnarRequest
+	1, // 3: symmetric.CipherService.DecryptColumnar:input_type -> symmetric.ColumnarRequest
+	2, // 4: symmetric.CipherService.EncryptOTP:input_type -> symmetric.OTPRequest
+	2, // 5: symmetric.CipherService.DecryptOTP:input_type -> symmetric.OTPRequest
+	3, // 6: symmetric.CipherService.EncryptCaesar:output_type -> common.CipherResponse
+	3, // 7: symmetric.CipherService.DecryptCaesar:output_type -> common.CipherResponse
+	3, // 8: symmetric.CipherService.EncryptColumnar:output_type -> common.CipherResponse
+	3, // 9: symmetric.CipherService.DecryptColumnar:output_type -> common.CipherResponse
+	3, // 10: symmetric.CipherService.EncryptOTP:output_type -> common.CipherResponse
+	3, // 11: symmetric.CipherService.DecryptOTP:output_type -> common.CipherResponse
 	6, // [6:12] is the sub-list for method output_type
 	0, // [0:6] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
@@ -287,26 +242,26 @@ var file_cipher_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_cipher_proto_init() }
-func file_cipher_proto_init() {
-	if File_cipher_proto != nil {
+func init() { file_symmetric_proto_init() }
+func file_symmetric_proto_init() {
+	if File_symmetric_proto != nil {
 		return
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: unsafe.Slice(unsafe.StringData(file_cipher_proto_rawDesc), len(file_cipher_proto_rawDesc)),
+			RawDescriptor: unsafe.Slice(unsafe.StringData(file_symmetric_proto_rawDesc), len(file_symmetric_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   3,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_cipher_proto_goTypes,
-		DependencyIndexes: file_cipher_proto_depIdxs,
-		MessageInfos:      file_cipher_proto_msgTypes,
+		GoTypes:           file_symmetric_proto_goTypes,
+		DependencyIndexes: file_symmetric_proto_depIdxs,
+		MessageInfos:      file_symmetric_proto_msgTypes,
 	}.Build()
-	File_cipher_proto = out.File
-	file_cipher_proto_goTypes = nil
-	file_cipher_proto_depIdxs = nil
+	File_symmetric_proto = out.File
+	file_symmetric_proto_goTypes = nil
+	file_symmetric_proto_depIdxs = nil
 }

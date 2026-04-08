@@ -2,12 +2,13 @@
 // versions:
 // - protoc-gen-go-grpc v1.6.1
 // - protoc             v7.34.0
-// source: cipher.proto
+// source: symmetric.proto
 
-package pb
+package symmetric
 
 import (
 	context "context"
+	common "github.com/basarardabaykal/cipherconverter-microservice/internal/pb/common"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -19,24 +20,24 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	CipherService_EncryptCaesar_FullMethodName   = "/cipher.CipherService/EncryptCaesar"
-	CipherService_DecryptCaesar_FullMethodName   = "/cipher.CipherService/DecryptCaesar"
-	CipherService_EncryptColumnar_FullMethodName = "/cipher.CipherService/EncryptColumnar"
-	CipherService_DecryptColumnar_FullMethodName = "/cipher.CipherService/DecryptColumnar"
-	CipherService_EncryptOTP_FullMethodName      = "/cipher.CipherService/EncryptOTP"
-	CipherService_DecryptOTP_FullMethodName      = "/cipher.CipherService/DecryptOTP"
+	CipherService_EncryptCaesar_FullMethodName   = "/symmetric.CipherService/EncryptCaesar"
+	CipherService_DecryptCaesar_FullMethodName   = "/symmetric.CipherService/DecryptCaesar"
+	CipherService_EncryptColumnar_FullMethodName = "/symmetric.CipherService/EncryptColumnar"
+	CipherService_DecryptColumnar_FullMethodName = "/symmetric.CipherService/DecryptColumnar"
+	CipherService_EncryptOTP_FullMethodName      = "/symmetric.CipherService/EncryptOTP"
+	CipherService_DecryptOTP_FullMethodName      = "/symmetric.CipherService/DecryptOTP"
 )
 
 // CipherServiceClient is the client API for CipherService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type CipherServiceClient interface {
-	EncryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
-	DecryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
-	EncryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
-	DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error)
-	EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error)
-	DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error)
+	EncryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	DecryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	EncryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
 }
 
 type cipherServiceClient struct {
@@ -47,9 +48,9 @@ func NewCipherServiceClient(cc grpc.ClientConnInterface) CipherServiceClient {
 	return &cipherServiceClient{cc}
 }
 
-func (c *cipherServiceClient) EncryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) EncryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_EncryptCaesar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -57,9 +58,9 @@ func (c *cipherServiceClient) EncryptCaesar(ctx context.Context, in *CaesarReque
 	return out, nil
 }
 
-func (c *cipherServiceClient) DecryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) DecryptCaesar(ctx context.Context, in *CaesarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_DecryptCaesar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -67,9 +68,9 @@ func (c *cipherServiceClient) DecryptCaesar(ctx context.Context, in *CaesarReque
 	return out, nil
 }
 
-func (c *cipherServiceClient) EncryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) EncryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_EncryptColumnar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -77,9 +78,9 @@ func (c *cipherServiceClient) EncryptColumnar(ctx context.Context, in *ColumnarR
 	return out, nil
 }
 
-func (c *cipherServiceClient) DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_DecryptColumnar_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -87,9 +88,9 @@ func (c *cipherServiceClient) DecryptColumnar(ctx context.Context, in *ColumnarR
 	return out, nil
 }
 
-func (c *cipherServiceClient) EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_EncryptOTP_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -97,9 +98,9 @@ func (c *cipherServiceClient) EncryptOTP(ctx context.Context, in *OTPRequest, op
 	return out, nil
 }
 
-func (c *cipherServiceClient) DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*CipherResponse, error) {
+func (c *cipherServiceClient) DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(CipherResponse)
+	out := new(common.CipherResponse)
 	err := c.cc.Invoke(ctx, CipherService_DecryptOTP_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
@@ -111,12 +112,12 @@ func (c *cipherServiceClient) DecryptOTP(ctx context.Context, in *OTPRequest, op
 // All implementations must embed UnimplementedCipherServiceServer
 // for forward compatibility.
 type CipherServiceServer interface {
-	EncryptCaesar(context.Context, *CaesarRequest) (*CipherResponse, error)
-	DecryptCaesar(context.Context, *CaesarRequest) (*CipherResponse, error)
-	EncryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error)
-	DecryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error)
-	EncryptOTP(context.Context, *OTPRequest) (*CipherResponse, error)
-	DecryptOTP(context.Context, *OTPRequest) (*CipherResponse, error)
+	EncryptCaesar(context.Context, *CaesarRequest) (*common.CipherResponse, error)
+	DecryptCaesar(context.Context, *CaesarRequest) (*common.CipherResponse, error)
+	EncryptColumnar(context.Context, *ColumnarRequest) (*common.CipherResponse, error)
+	DecryptColumnar(context.Context, *ColumnarRequest) (*common.CipherResponse, error)
+	EncryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error)
+	DecryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error)
 	mustEmbedUnimplementedCipherServiceServer()
 }
 
@@ -127,22 +128,22 @@ type CipherServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedCipherServiceServer struct{}
 
-func (UnimplementedCipherServiceServer) EncryptCaesar(context.Context, *CaesarRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) EncryptCaesar(context.Context, *CaesarRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method EncryptCaesar not implemented")
 }
-func (UnimplementedCipherServiceServer) DecryptCaesar(context.Context, *CaesarRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) DecryptCaesar(context.Context, *CaesarRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DecryptCaesar not implemented")
 }
-func (UnimplementedCipherServiceServer) EncryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) EncryptColumnar(context.Context, *ColumnarRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method EncryptColumnar not implemented")
 }
-func (UnimplementedCipherServiceServer) DecryptColumnar(context.Context, *ColumnarRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) DecryptColumnar(context.Context, *ColumnarRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DecryptColumnar not implemented")
 }
-func (UnimplementedCipherServiceServer) EncryptOTP(context.Context, *OTPRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) EncryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method EncryptOTP not implemented")
 }
-func (UnimplementedCipherServiceServer) DecryptOTP(context.Context, *OTPRequest) (*CipherResponse, error) {
+func (UnimplementedCipherServiceServer) DecryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DecryptOTP not implemented")
 }
 func (UnimplementedCipherServiceServer) mustEmbedUnimplementedCipherServiceServer() {}
@@ -278,7 +279,7 @@ func _CipherService_DecryptOTP_Handler(srv interface{}, ctx context.Context, dec
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var CipherService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "cipher.CipherService",
+	ServiceName: "symmetric.CipherService",
 	HandlerType: (*CipherServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
@@ -307,5 +308,5 @@ var CipherService_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "cipher.proto",
+	Metadata: "symmetric.proto",
 }

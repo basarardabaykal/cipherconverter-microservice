@@ -6,9 +6,9 @@ if not exist internal\pb (
 )
 
 protoc -I ./proto ^
-  --go_out=./internal/pb --go_opt=paths=source_relative ^
-  --go-grpc_out=./internal/pb --go-grpc_opt=paths=source_relative ^
-  ./proto/cipher.proto
+  --go_out=. --go_opt=module=github.com/basarardabaykal/cipherconverter-microservice ^
+  --go-grpc_out=. --go-grpc_opt=module=github.com/basarardabaykal/cipherconverter-microservice ^
+  ./proto/*.proto
 
 if %ERRORLEVEL% EQU 0 (
     echo Generation complete!
