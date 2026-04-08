@@ -5,13 +5,14 @@ import (
 	"log"
 
 	"github.com/basarardabaykal/cipherconverter-microservice/internal/cipher"
-	"github.com/basarardabaykal/cipherconverter-microservice/internal/pb"
+	"github.com/basarardabaykal/cipherconverter-microservice/internal/pb/common"
+	"github.com/basarardabaykal/cipherconverter-microservice/internal/pb/symmetric"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
 
-func (s *server) EncryptOTP(ctx context.Context, req *pb.OTPRequest) (*pb.CipherResponse, error) {
+func (s *symServer) EncryptOTP(ctx context.Context, req *symmetric.OTPRequest) (*common.CipherResponse, error) {
 	if len(req.GetText()) == 0 {
 		return nil, status.Error(codes.InvalidArgument, "text to encrypt cannot be empty")
 	}
@@ -24,10 +25,10 @@ func (s *server) EncryptOTP(ctx context.Context, req *pb.OTPRequest) (*pb.Cipher
 	c := cipher.NewOTP(req.GetKey())
 	result := c.Encrypt(req.GetText())
 
-	return &pb.CipherResponse{Result: result}, nil
+	return &common.CipherResponse{Result: result}, nil
 }
 
-func (s *server) DecryptOTP(ctx context.Context, req *pb.OTPRequest) (*pb.CipherResponse, error) {
+func (s *symServer) DecryptOTP(ctx context.Context, req *symmetric.OTPRequest) (*common.CipherResponse, error) {
 	if len(req.GetText()) == 0 {
 		return nil, status.Error(codes.InvalidArgument, "text to decrypt cannot be empty")
 	}
@@ -40,5 +41,5 @@ func (s *server) DecryptOTP(ctx context.Context, req *pb.OTPRequest) (*pb.Cipher
 	c := cipher.NewOTP(req.GetKey())
 	result := c.Decrypt(req.GetText())
 
-	return &pb.CipherResponse{Result: result}, nil
+	return &common.CipherResponse{Result: result}, nil
 }
