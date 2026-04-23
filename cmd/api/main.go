@@ -6,11 +6,11 @@ import (
 
 	"google.golang.org/grpc"
 
-	"github.com/basarardabaykal/cipherconverter-microservice/internal/pb"
+	"github.com/basarardabaykal/cipherconverter-microservice/internal/pb/symmetric"
 )
 
 type server struct {
-	pb.UnimplementedCipherServiceServer
+	symmetric.UnimplementedCipherServiceServer
 }
 
 func main() {
@@ -20,7 +20,7 @@ func main() {
 	}
 
 	s := grpc.NewServer()
-	pb.RegisterCipherServiceServer(s, &server{})
+	symmetric.RegisterCipherServiceServer(s, &server{})
 
 	log.Printf("gRPC Cipher microservice is running and listening on %v", lis.Addr())
 
