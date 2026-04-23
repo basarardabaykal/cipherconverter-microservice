@@ -256,7 +256,7 @@ const file_symmetric_proto_rawDesc = "" +
 	"\rAffineRequest\x12\x12\n" +
 	"\x04text\x18\x01 \x01(\fR\x04text\x12\f\n" +
 	"\x01a\x18\x02 \x01(\x05R\x01a\x12\f\n" +
-	"\x01b\x18\x03 \x01(\x05R\x01b2\x9d\x03\n" +
+	"\x01b\x18\x03 \x01(\x05R\x01b2\xa3\x04\n" +
 	"\rCipherService\x12A\n" +
 	"\rEncryptCaesar\x12\x18.symmetric.CaesarRequest\x1a\x16.common.CipherResponse\x12A\n" +
 	"\rDecryptCaesar\x12\x18.symmetric.CaesarRequest\x1a\x16.common.CipherResponse\x12E\n" +
@@ -265,7 +265,9 @@ const file_symmetric_proto_rawDesc = "" +
 	"\n" +
 	"EncryptOTP\x12\x15.symmetric.OTPRequest\x1a\x16.common.CipherResponse\x12;\n" +
 	"\n" +
-	"DecryptOTP\x12\x15.symmetric.OTPRequest\x1a\x16.common.CipherResponseBOZMgithub.com/basarardabaykal/cipherconverter-microservice/internal/pb/symmetricb\x06proto3"
+	"DecryptOTP\x12\x15.symmetric.OTPRequest\x1a\x16.common.CipherResponse\x12A\n" +
+	"\rEncryptAffine\x12\x18.symmetric.AffineRequest\x1a\x16.common.CipherResponse\x12A\n" +
+	"\rDecryptAffine\x12\x18.symmetric.AffineRequest\x1a\x16.common.CipherResponseBOZMgithub.com/basarardabaykal/cipherconverter-microservice/internal/pb/symmetricb\x06proto3"
 
 var (
 	file_symmetric_proto_rawDescOnce sync.Once
@@ -294,14 +296,18 @@ var file_symmetric_proto_depIdxs = []int32{
 	1, // 3: symmetric.CipherService.DecryptColumnar:input_type -> symmetric.ColumnarRequest
 	2, // 4: symmetric.CipherService.EncryptOTP:input_type -> symmetric.OTPRequest
 	2, // 5: symmetric.CipherService.DecryptOTP:input_type -> symmetric.OTPRequest
-	4, // 6: symmetric.CipherService.EncryptCaesar:output_type -> common.CipherResponse
-	4, // 7: symmetric.CipherService.DecryptCaesar:output_type -> common.CipherResponse
-	4, // 8: symmetric.CipherService.EncryptColumnar:output_type -> common.CipherResponse
-	4, // 9: symmetric.CipherService.DecryptColumnar:output_type -> common.CipherResponse
-	4, // 10: symmetric.CipherService.EncryptOTP:output_type -> common.CipherResponse
-	4, // 11: symmetric.CipherService.DecryptOTP:output_type -> common.CipherResponse
-	6, // [6:12] is the sub-list for method output_type
-	0, // [0:6] is the sub-list for method input_type
+	3, // 6: symmetric.CipherService.EncryptAffine:input_type -> symmetric.AffineRequest
+	3, // 7: symmetric.CipherService.DecryptAffine:input_type -> symmetric.AffineRequest
+	4, // 8: symmetric.CipherService.EncryptCaesar:output_type -> common.CipherResponse
+	4, // 9: symmetric.CipherService.DecryptCaesar:output_type -> common.CipherResponse
+	4, // 10: symmetric.CipherService.EncryptColumnar:output_type -> common.CipherResponse
+	4, // 11: symmetric.CipherService.DecryptColumnar:output_type -> common.CipherResponse
+	4, // 12: symmetric.CipherService.EncryptOTP:output_type -> common.CipherResponse
+	4, // 13: symmetric.CipherService.DecryptOTP:output_type -> common.CipherResponse
+	4, // 14: symmetric.CipherService.EncryptAffine:output_type -> common.CipherResponse
+	4, // 15: symmetric.CipherService.DecryptAffine:output_type -> common.CipherResponse
+	8, // [8:16] is the sub-list for method output_type
+	0, // [0:8] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
