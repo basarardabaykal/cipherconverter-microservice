@@ -26,6 +26,8 @@ const (
 	CipherService_DecryptColumnar_FullMethodName = "/symmetric.CipherService/DecryptColumnar"
 	CipherService_EncryptOTP_FullMethodName      = "/symmetric.CipherService/EncryptOTP"
 	CipherService_DecryptOTP_FullMethodName      = "/symmetric.CipherService/DecryptOTP"
+	CipherService_EncryptAffine_FullMethodName   = "/symmetric.CipherService/EncryptAffine"
+	CipherService_DecryptAffine_FullMethodName   = "/symmetric.CipherService/DecryptAffine"
 )
 
 // CipherServiceClient is the client API for CipherService service.
@@ -38,6 +40,8 @@ type CipherServiceClient interface {
 	DecryptColumnar(ctx context.Context, in *ColumnarRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
 	EncryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
 	DecryptOTP(ctx context.Context, in *OTPRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	EncryptAffine(ctx context.Context, in *AffineRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
+	DecryptAffine(ctx context.Context, in *AffineRequest, opts ...grpc.CallOption) (*common.CipherResponse, error)
 }
 
 type cipherServiceClient struct {
@@ -108,6 +112,26 @@ func (c *cipherServiceClient) DecryptOTP(ctx context.Context, in *OTPRequest, op
 	return out, nil
 }
 
+func (c *cipherServiceClient) EncryptAffine(ctx context.Context, in *AffineRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.CipherResponse)
+	err := c.cc.Invoke(ctx, CipherService_EncryptAffine_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *cipherServiceClient) DecryptAffine(ctx context.Context, in *AffineRequest, opts ...grpc.CallOption) (*common.CipherResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(common.CipherResponse)
+	err := c.cc.Invoke(ctx, CipherService_DecryptAffine_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // CipherServiceServer is the server API for CipherService service.
 // All implementations must embed UnimplementedCipherServiceServer
 // for forward compatibility.
@@ -118,6 +142,8 @@ type CipherServiceServer interface {
 	DecryptColumnar(context.Context, *ColumnarRequest) (*common.CipherResponse, error)
 	EncryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error)
 	DecryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error)
+	EncryptAffine(context.Context, *AffineRequest) (*common.CipherResponse, error)
+	DecryptAffine(context.Context, *AffineRequest) (*common.CipherResponse, error)
 	mustEmbedUnimplementedCipherServiceServer()
 }
 
@@ -145,6 +171,12 @@ func (UnimplementedCipherServiceServer) EncryptOTP(context.Context, *OTPRequest)
 }
 func (UnimplementedCipherServiceServer) DecryptOTP(context.Context, *OTPRequest) (*common.CipherResponse, error) {
 	return nil, status.Error(codes.Unimplemented, "method DecryptOTP not implemented")
+}
+func (UnimplementedCipherServiceServer) EncryptAffine(context.Context, *AffineRequest) (*common.CipherResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method EncryptAffine not implemented")
+}
+func (UnimplementedCipherServiceServer) DecryptAffine(context.Context, *AffineRequest) (*common.CipherResponse, error) {
+	return nil, status.Error(codes.Unimplemented, "method DecryptAffine not implemented")
 }
 func (UnimplementedCipherServiceServer) mustEmbedUnimplementedCipherServiceServer() {}
 func (UnimplementedCipherServiceServer) testEmbeddedByValue()                       {}
@@ -275,6 +307,42 @@ func _CipherService_DecryptOTP_Handler(srv interface{}, ctx context.Context, dec
 	return interceptor(ctx, in, info, handler)
 }
 
+func _CipherService_EncryptAffine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AffineRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CipherServiceServer).EncryptAffine(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CipherService_EncryptAffine_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CipherServiceServer).EncryptAffine(ctx, req.(*AffineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _CipherService_DecryptAffine_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(AffineRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(CipherServiceServer).DecryptAffine(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: CipherService_DecryptAffine_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(CipherServiceServer).DecryptAffine(ctx, req.(*AffineRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // CipherService_ServiceDesc is the grpc.ServiceDesc for CipherService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -305,6 +373,14 @@ var CipherService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DecryptOTP",
 			Handler:    _CipherService_DecryptOTP_Handler,
+		},
+		{
+			MethodName: "EncryptAffine",
+			Handler:    _CipherService_EncryptAffine_Handler,
+		},
+		{
+			MethodName: "DecryptAffine",
+			Handler:    _CipherService_DecryptAffine_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
